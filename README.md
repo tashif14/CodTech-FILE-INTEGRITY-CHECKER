@@ -1,84 +1,80 @@
-# CodTech-FILE-INTEGRITY-CHECKER
-
-File Integrity Checker – Documentation
+File Integrity Checker – Improved Brief Documentation
 1. Introduction
 
-The File Integrity Checker is a Python-based security tool designed to detect unauthorized modifications to files by calculating and comparing their cryptographic hash values over time. It helps ensure file integrity, identify tampering, and support security monitoring processes.
-
-This tool is useful in cybersecurity for:
-
-Detecting unauthorized changes
-
-Monitoring configuration or log files
-
-Identifying malware activity
-
-Maintaining compliance and audit readiness
+The File Integrity Checker is a Python-based cybersecurity tool designed to ensure the integrity of critical files. It works by generating and monitoring SHA-256 hash values to detect any unauthorized modifications. This tool is widely applicable in security environments for identifying tampering, detecting malware activity, ensuring configuration integrity, and supporting compliance requirements.
 
 2. Objective
 
-The objective of this task is to build a simple but effective file integrity monitoring tool using Python’s hashlib library.
-The script calculates the SHA-256 hash of each monitored file and alerts the user if a file’s content has been altered, deleted, or replaced.
+The objective of this project is to build a lightweight yet effective file integrity monitoring solution using Python’s hashlib library.
+The tool continuously checks selected files, compares their current hash values with previously stored values, and alerts the user whenever a change is detected.
 
 3. How the Tool Works
 
-The program performs the following steps:
+The File Integrity Checker follows a straightforward process:
 
-Step 1 — Initial Hash Generation
+Step 1: Initial Hash Creation
 
-The script computes SHA-256 hashes for each file listed in files_to_monitor.
+The script calculates an initial SHA-256 hash for every file listed in files_to_monitor.
 
-These hashes are stored in a JSON file named file_hashes.json.
+These hashes are stored in a JSON file (file_hashes.json) for future comparison.
 
-Step 2 — Continuous Monitoring
+Step 2: Continuous Monitoring
 
-The script repeatedly recalculates the hash values at a defined interval (default: every 5 seconds).
+At regular intervals (default: 5 seconds), the script recalculates each file’s hash.
 
-Each new hash is compared with the stored hash.
+The new hash value is compared with the stored value.
 
-Step 3 — Alerts
+Step 3: Alerts and Detection
 
-The tool generates different alerts:
+The tool provides clear alerts:
 
-Event	Alert
+Event	Alert Message
 File modified	[ALERT] File modified: filename
 File missing	[WARNING] File missing: filename
 No change	[OK] No change detected
-Step 4 — Hash Update
+Step 4: Updating Hash Values
 
-When a file change is detected, the hash value in file_hashes.json is updated automatically.
+If a file modification is detected, the tool automatically updates the new hash in file_hashes.json, ensuring accurate monitoring for subsequent checks.
 
-4. Features
+4. Key Features
 
-✔ Calculates SHA-256 hashes
-✔ Detects file modification
-✔ Detects missing / deleted files
-✔ Stores and loads hash values in a JSON file
-✔ Easy to configure and extend
-✔ Lightweight and suitable for security monitoring tasks
+✔ SHA-256 hashing for strong integrity verification
+
+✔ Modification detection for monitored files
+
+✔ Missing file alerts
+
+✔ JSON-based hash storage
+
+✔ Customizable monitoring list and interval
+
+✔ Lightweight and easy to deploy
 
 5. Files Included
-File Name	Description
-file_integrity_checker.py	Main Python monitoring script
-file_hashes.json	Stores the hash values of monitored files (auto-generated)
+File	Description
+file_integrity_checker.py	Main script responsible for hashing and monitoring
+file_hashes.json	Auto-generated hash storage file
 6. How to Use the Tool
-1. Modify the file list
+1. Configure File Monitoring
 
-In the __main__ block, list the files you want to monitor:
+Edit this section in the script:
 
 files_to_monitor = [
     "test1.txt",
     "test2.txt"
 ]
 
-2. Run the script
+2. Run the Script
 python file_integrity_checker.py
 
-3. Modify a file to test
+3. Trigger a Change
+
+Modify one of the files:
+
 echo "New content" >> test1.txt
 
 
-You will see:
+Expected Output:
 
 [ALERT] File modified: test1.txt
 Old hash: d7a9...
@@ -88,29 +84,39 @@ New hash: 33f1...
 
 Python 3
 
-hashlib for SHA-256 hashing
+hashlib – SHA-256 hashing
 
-json for storing hash records
+json – Hash storage database
 
-os, time for file checking and monitoring intervals
+os, time – File checks and monitoring schedule
 
 8. Limitations
 
-⚠ Does not monitor subdirectories
-⚠ No real-time OS-level events (uses time-based polling)
-⚠ No alert notifications (email/SMS) — can be added
+❗ Does not automatically monitor subdirectories
+
+❗ No real-time event-driven detection
+
+❗ No built-in email/SMS alerting
+
+❗ Performance depends on interval settings for large file sets
 
 9. Possible Enhancements
 
-You can extend this tool further by adding:
+To extend functionality and improve production use:
 
-🔹 Real-time monitoring using watchdog
-🔹 Directory-wide monitoring
-🔹 Email or SMS notifications
-🔹 Log integration (Syslog, SIEM/Splunk)
-🔹 GUI dashboard
-🔹 Tamper-proof hash storage
+🔹 Integrate watchdog for real-time monitoring
+
+🔹 Add recursive directory monitoring
+
+🔹 Implement email/SMS alerts for critical file changes
+
+🔹 Send logs to SIEM tools (Splunk, ELK, Azure Sentinel)
+
+🔹 Add GUI dashboard for real-time visibility
+
+🔹 Use HMAC or digital signatures for tamper-proof hash files
 
 10. Conclusion
 
-This File Integrity Checker provides a simple but effective way to monitor file changes using SHA-256 hashing. It demonstrates essential cybersecurity concepts such as integrity verification, hashing, alerting, and monitoring automation. The tool serves as a strong foundation for more advanced file integrity monitoring systems used in enterprise security.
+The File Integrity Checker is an effective and easy-to-use tool for monitoring the integrity of important files. By leveraging SHA-256 hashing, automated monitoring, and alert generation, it provides a foundational level of security suitable for educational purposes, small deployments, and further enhancement in enterprise environments.
+This project demonstrates essential cybersecurity practices, including hashing, integrity verification, automation, and secure monitoring.
